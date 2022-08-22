@@ -1,0 +1,44 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="row">
+    <h3 class='text-center'>{{blog.title}}</h3>
+
+    <div class="col-sm-4">
+        <p>Publish Date : <i>{{blog.publish_date}}</i></p>
+        <p>Update Date : <i>{{blog.update_date}}</i></p>
+        <h3>Posted By : {{blog.author}}</h3>
+        <img src='/media/{{blog.blog_image}}' class='img-fluid'>
+    </div>
+    <div class="col-sm-8">
+        <p>{{blog.blog_content|linebreaks}}</p>
+    </div>
+    <div class="col-sm-12">
+        {% if not like %}
+        <a href='{% url 'App_Blog:like' pk=blog.pk %}' class='btn btn-primary  my-5'><i class="fa-solid fa-thumbs-up"></i></a>
+        {% else %}
+        <a href='{% url 'App_Blog:unlike' pk=blog.pk %}' class='btn btn-primary  my-5'><i class="fa-solid fa-thumbs-down"></i></a>
+        {% endif %}
+        <h6>Likes : {{blog.like_blog.count}}  Comments : {{blog.comment_blog.count}}</h6>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-6">
+        <h4>Comment:</h4>
+        {% for comment in blog.comment_blog.all %}
+        <p><a href=''>{{comment.user}}</a> {{comment.comment}} <br><i>{{comment.comment_date}}</i></p>
+        {% endfor %}
+    </div>
+    <div class="col-sm-6">
+        <form method='POST'>
+            {{form|crispy}}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary my-3">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock body %}

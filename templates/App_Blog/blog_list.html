@@ -1,0 +1,24 @@
+{% extends 'navbar.html' %}
+{% load custom_filter %}
+{% block title %}{% endblock title %}
+
+{% block body %}
+{% for blog in blogs %}
+<h3 class='text-center'>{{blog.title}}</h3>
+<div class="row">
+    <div class="col-sm-4">
+        <i>Publish Date : {{blog.publish_date}}</i>
+        <img src="/media/{{blog.blog_image}}" class="img-fluid rounded-top" alt="">
+    </div>
+    <div class="col-sm-8">
+        <p class='text-body'>{{blog.blog_content|range_filter|linebreaks}}<a href="{% url 'App_Blog:blog_details' pk=blog.pk %}">read more</a>
+        </p>
+        <h6>Posted By : @{{blog.author}}</h6>
+        <h6>Likes : {{blog.like_blog.count}}  Comments : {{blog.comment_blog.count}}</h6>
+    </div>
+</div>
+
+
+<hr>
+{% endfor %}
+{% endblock body %}

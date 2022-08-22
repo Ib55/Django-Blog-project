@@ -1,0 +1,23 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Edit Info{% endblock title %}
+
+{% block body %}
+<div class='w-50 m-auto mt-5'>
+    {% if change %}
+      <div class="alert alert-secondary" role="alert">
+        <strong>Update Successfully</strong>
+      </div>
+      
+    {% else %}
+    <h3 class='text-center'>Edit Information</h3>
+    <form method='POST'>
+        {{form|crispy}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    {% endif %}
+    
+        
+</div>
+{% endblock body %}

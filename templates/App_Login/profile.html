@@ -1,0 +1,37 @@
+{% extends 'navbar.html' %}
+{% block title %}Profile Page{% endblock title %}
+
+{% block body %}
+<h3>Your Profile</h3>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card text-white bg-success">
+          {% if user.profile_user %}
+          <img class="card-img-top" src="/media/{{user.profile_user.profile_pic}}" alt="Title">
+          <div class="card-body">
+            <a  class="btn btn-primary" href="{% url 'App_Login:change-profile-pic' %}">Change Profile Picture</a>
+          </div>
+           {% else %}
+           <img class="card-img-top" src="/media/profile_pics/profile.png" alt="Title">
+           <div class="card-body">
+            <a  class="btn btn-primary" href="{% url 'App_Login:add_pro_pic' %}">Add Profile Picture</a>
+          </div>
+          {% endif %}
+          
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="card text-white bg-success text-center">
+          <div class="card-body">
+            <h4 class="card-title">Information</h4>
+            <p class="card-text">Username : {{user.username}}</p>
+            <p class="card-text">Email : {{user.email}}</p>
+            <p class="card-text">First Name : {{user.first_name}}</p>
+            <p class="card-text">Last Name : {{user.last_name}}</p>
+            <a  class="btn btn-primary" href="{% url 'App_Login:edit' %}">Edit Info</a>
+          </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

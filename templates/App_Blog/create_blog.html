@@ -1,0 +1,14 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Write Blog{% endblock title %}
+
+{% block body %}
+<div>
+    <form method='POST' enctype='multipart/form-data'>
+         {{form|crispy}}
+         {% csrf_token %}
+         <button type="submit" class="btn btn-primary mt-4">Publish</button>
+    </form>
+</di>
+{% endblock body %}
