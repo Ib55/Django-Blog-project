@@ -12,7 +12,7 @@
   </div>
   <div class="col-sm-8">
     <p>{{blog.blog_content|range_filter|linebreaks}}</p>
-    <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}">Read More</a>
+    <a href="{% url 'App_Blog:blog_details' pk=blog.pk %}">Read More</a>
   </div>
 </div>
 <a href="{% url 'App_Blog:update' pk=blog.pk %}" class='btn btn-warning my-3 px-4 py-2'>Edit</a>
